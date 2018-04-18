@@ -1,0 +1,25 @@
+.row {
+    margin-top: 20px;
+}
+
+.button {
+    margin: 5px;
+}
+
+.gif-divs {
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 40px;
+}
+
+p {
+    font-size: 12px;
+}
+.title{
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.submit {
+    margin-bottom: 30px;
+}
