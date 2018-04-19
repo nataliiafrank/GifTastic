@@ -6,32 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>GifTastic</title>
-    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
+    <div class="row">
+        <h1>GIFY SEARCH</h1>
+    </div>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="text-input" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default submit" type="submit">Go!</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
         <div class="row">
             <div class="col-md-12 buttons"></div>
         </div>
 
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-3">
-                <form class="form">
-                    <div class="form-group">
-                        <label for="text-input">Add an Animal</label>
-                        <input type="text" id="text-input" class="form-control">
-                    </div>
-                    <button type="submit" class="submit btn btn-primary">Submit</button>
-                </form>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-9 gifs"></div>
+            <div class="col-xs-12 col-sm-12 col-md-12s gifs"></div>
         </div>
-
     </div>
 
     <script src="https://code.jquery.com/jquery.js"></script>

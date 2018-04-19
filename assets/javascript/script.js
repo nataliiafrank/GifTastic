@@ -1,19 +1,22 @@
-var arr = ["cats", "dogs"];
+// Initial array of animals
+var arr = ["cats", "dogs", "kittens", "puppies", "catdog"];
 
-function displayGifs(){
+// Function for getting and rendering content
+function displayGifs() {
     var animal = $(this).attr("data-animal");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=ND5ruAbzX9ak0sfdIZ9AzngFf15mkIse&limit=10";
-    console.log(animal)
-    
+
+    // AJAX call for the button being clicked
     $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(function(response){
+    }).then(function (response) {
         console.log(queryURL)
         console.log(response)
         var results = response.data;
 
-        for(var i = 0; i < results.length; i ++){
+        // Looping through array of annimals 
+        for (var i = 0; i < results.length; i++) {
             var animalDiv = $("<div>");
             animalDiv.addClass("gif-divs")
 
@@ -31,71 +34,72 @@ function displayGifs(){
 
             var title = $("<p>");
             title.addClass("title")
-            title.text("Title: " + results[i].title);
+            title.text(results[i].title);
 
             animalDiv.html(animalGif);
             animalDiv.prepend(title);
             animalDiv.prepend(rating);
-            
+
+            // Render animalDiv to the page
             $(".gifs").prepend(animalDiv);
         }
-    }) 
+    })
 };
 
-function buttonRender(){
+function buttonRender() {
+    // Deleting buttons prior to adding new ones
     $(".buttons").empty();
-    
-    for(var i=0; i < arr.length; i++){
+
+    // Looping through the array of annimal and creating buttons for them
+    for (var i = 0; i < arr.length; i++) {
         var newButton = $("<button>");
-    newButton.attr("type", "button")
-    newButton.addClass("button btn btn-default")
-    newButton.attr("data-animal", arr[i])
-    newButton.text(arr[i])
+        newButton.attr("type", "button")
+        newButton.addClass("button btn btn-default")
+        newButton.attr("data-animal", arr[i])
+        newButton.text(arr[i])
 
-    $(".buttons").append(newButton)
+        // Rendering buttons to the page
+        $(".buttons").append(newButton)
     }
-}
+};
 
-
-$(".submit").on("click", function(event){
+// Handles events where a 'Go' button is clicked
+$(".submit").on("click", function (event) {
     event.preventDefault();
 
+    // Grabs the input from the textbox
     var input = $("#text-input").val().trim();
 
+    // Adding animals fron input to the array
     arr.push(input)
     console.log(arr)
 
     // Clear the input area
     $("#text-input").val("");
-    
-    buttonRender();
-})
 
+    // Renders buttons from the updated array 
+    buttonRender();
+});
+
+// Event listener for buttons
 $(document).on("click", ".button", displayGifs);
 
-buttonRender();
+// Event listener for gifs. Changes state forom static to animated and back
+$(document).on("click", ".gif", function () {
 
-
-//==================================
-$(document).on("click", ".gif", function() {
-    console.log("click")
-    // The attr jQuery method allows us to get or set the value of any attribute on our HTML element
+    // Get the value of a "data-state" attribute of the image that is being clicked
     var state = $(this).attr("data-state");
     // If the clicked image's state is still, update its src attribute to what its data-animate value is.
     // Then, set the image's data-state to animate
     // Else set src to the data-still value
     if (state === "still") {
-      $(this).attr("src", $(this).attr("data-animate"));
-      $(this).attr("data-state", "animate");
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
     } else {
-      $(this).attr("src", $(this).attr("data-still"));
-      $(this).attr("data-state", "still");
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
     }
-  });
-//===================================
+});
 
-
-
-
-
-
+// Displaying the intial buttons from initial array
+buttonRender();
