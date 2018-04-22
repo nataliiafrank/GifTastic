@@ -3,6 +3,9 @@ var arr = ["cats", "dogs", "kittens", "puppies", "catdog"];
 
 // Function for getting and rendering content
 function displayGifs() {
+    // clear .gifs div
+    $(".gifs").empty();
+
     var animal = $(this).attr("data-animal");
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + animal + "&api_key=ND5ruAbzX9ak0sfdIZ9AzngFf15mkIse&limit=10";
 
@@ -32,12 +35,7 @@ function displayGifs() {
             var rating = $("<p>");
             rating.text("Rating: " + results[i].rating);
 
-            var title = $("<p>");
-            title.addClass("title")
-            title.text(results[i].title);
-
             animalDiv.html(animalGif);
-            animalDiv.prepend(title);
             animalDiv.prepend(rating);
 
             // Render animalDiv to the page
@@ -63,10 +61,8 @@ function buttonRender() {
     }
 };
 
-// Handles events where a 'Go' button is clicked
-$(".submit").on("click", function (event) {
-    event.preventDefault();
-
+// Function for adding a button
+function addButton() {
     // Grabs the input from the textbox
     var input = $("#text-input").val().trim();
 
@@ -79,6 +75,19 @@ $(".submit").on("click", function (event) {
 
     // Renders buttons from the updated array 
     buttonRender();
+};
+
+// Handles events where a 'Go' button is clicked
+$(".submit").on("click", function (event) {
+    event.preventDefault();
+
+    addButton();
+});
+
+$('#text-input').keypress(function (event) {
+    if (event.keyCode === 13) {
+        addButton();
+    }
 });
 
 // Event listener for buttons
